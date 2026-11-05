@@ -52,6 +52,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_785cb"]
+
 [node name="Player" type="Node2D" unique_id=1356228926]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=157161446]
@@ -60,5 +62,9 @@ script = ExtResource("1_i3pqv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1887321304]
 position = Vector2(2, -3)
 sprite_frames = SubResource("SpriteFrames_ddy7s")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=89067985]
+scale = Vector2(1.2986301, -1.2247363)
+shape = SubResource("CircleShape2D_785cb")

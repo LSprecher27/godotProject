@@ -2,11 +2,32 @@
 
 [ext_resource type="PackedScene" uid="uid://c5y33b5fmxwl2" path="res://player.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://oasfxevaherf" path="res://enemy_1.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://knx3ttmatpmi" path="res://killzone.tscn" id="3_feb5d"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_785cb"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xlwbr"]
 
 [node name="Game" type="Node2D" unique_id=275028867]
 
 [node name="Player" parent="." unique_id=1356228926 instance=ExtResource("1_e2o6t")]
-position = Vector2(42, -2)
+position = Vector2(42, -18)
 scale = Vector2(1.2, 1.2)
 
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=752930764]
+zoom = Vector2(2, 2)
+
 [node name="enemy1" parent="." unique_id=1380984277 instance=ExtResource("2_feb5d")]
+position = Vector2(0, -16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=441625035]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=380037135]
+shape = SubResource("WorldBoundaryShape2D_785cb")
+
+[node name="Killzone" parent="." unique_id=405683312 instance=ExtResource("3_feb5d")]
+position = Vector2(-4, 182)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Killzone" unique_id=1122749063]
+position = Vector2(1.9931656, -1.9297519)
+shape = SubResource("WorldBoundaryShape2D_xlwbr")
