@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://oasfxevaherf"]
 
+[ext_resource type="Script" uid="uid://bgrmu71vtym7v" path="res://enemy_1.gd" id="1_663o1"]
 [ext_resource type="Texture2D" uid="uid://cmiddik2f73oh" path="res://assets/sprites/tyler_walk.png" id="1_mbxyh"]
 [ext_resource type="Texture2D" uid="uid://dylmmp7nakedg" path="res://assets/sprites/tyler_idle.png" id="1_pjquw"]
+[ext_resource type="PackedScene" uid="uid://knx3ttmatpmi" path="res://killzone.tscn" id="4_ovk8a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gqj32"]
 atlas = ExtResource("1_pjquw")
@@ -53,14 +55,18 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785cb"]
 
-[node name="enemy1" type="Node2D" unique_id=1380984277]
+[node name="enemy1" type="CharacterBody2D" unique_id=1586717431]
+script = ExtResource("1_663o1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1420055942]
 sprite_frames = SubResource("SpriteFrames_ddy7s")
 animation = &"idle"
-frame_progress = 0.5254189
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=386760347]
 position = Vector2(-3, 0)
 scale = Vector2(1.2482204, 1.3912596)
 shape = SubResource("CircleShape2D_785cb")
+
+[node name="Killzone" parent="." unique_id=405683312 instance=ExtResource("4_ovk8a")]
+position = Vector2(-3, -1)
+scale = Vector2(1.2216557, 1.647306)

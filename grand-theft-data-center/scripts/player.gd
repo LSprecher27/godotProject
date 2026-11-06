@@ -1,5 +1,14 @@
 extends CharacterBody2D
+class_name Player
 
+@export var speed: float = 130.0
+@export var jump_velocity: float = -300.0
+
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
+
+var spawn_position: Vector2
+var is_dead: bool = false
 
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
@@ -42,3 +51,50 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	
+func _ready() -> void:
+	# Store the starting position
+	spawn_position = global_position
+
+func _physics_process_die(delta: float) -> void:
+	# 1. Death sequence physics
+	if is_dead:
+		# Continue falling through the world with gravity
+		velocity.y += gravity * delta
+		# When disabled, move_and_slide() will no longer collide with walls/floors
+		move_and_slide()
+
+		# Check if the player has plunged far below the screen/map
+		if global_position.y > spawn_position.y + 600.0:
+			respawn()
+		return
+
+	# 2. Normal movement physics
+	if not is_on_floor():
+		velocity.y += gravity * delta
+
+	# Regular player controls / movement here...
+	move_and_slide()
+
+func die() -> void:
+	if is_dead:
+		return
+
+	is_dead = true
+	print("You died!")
+
+	# Disable collision safely on the physics frame so the player drops through all floors
+	collision_shape.set_deferred("disabled", true)
+
+	# Classic Mario hop: bounce slightly upward, then plummet downward
+	velocity.x = 0
+	velocity.y = -250.0
+
+func respawn() -> void:
+	# Reset position and motion
+	global_position = spawn_position
+	velocity = Vector2.ZERO
+
+	# Re-enable collision
+	collision_shape.set_deferred("disabled", false)
+	is_dead = false
