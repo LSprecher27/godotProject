@@ -1,13 +1,16 @@
 extends Control
 
 # Customize these directly in the Inspector on the right!
-@export var game_title: String = "MY GAME"
+@export var game_title: String = "GRAND THEFT DATA CENTER"
 @export_file("*.tscn") var main_game_path: String = "res://game.tscn"
+@export_file("*.mp3", "*.ogg", "*.wav") var menu_music_path: String = "res://assets/music/menuMusic.mp3"
+@export_range(-40.0, 6.0) var music_volume_db: float = 0.0
 @export var accent_color: Color = Color(0.24, 0.48, 0.96)
 
 var loading_overlay: ColorRect
 var progress_bar: ProgressBar
 var status_label: Label
+var music_player: AudioStreamPlayer
 var is_loading: bool = false
 var progress: Array = []
 
@@ -19,6 +22,22 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_build_start_screen()
 	_build_loading_screen()
+	_start_menu_music()
+
+func _start_menu_music() -> void:
+	if menu_music_path == "" or not ResourceLoader.exists(menu_music_path):
+		push_warning("Menu music not found at: " + menu_music_path)
+		return
+
+	var stream := load(menu_music_path)
+	if stream is AudioStreamMP3 or stream is AudioStreamOggVorbis:
+		stream.loop = true
+
+	music_player = AudioStreamPlayer.new()
+	music_player.stream = stream
+	music_player.volume_db = music_volume_db
+	add_child(music_player)
+	music_player.play()
 
 func _build_start_screen() -> void:
 	# Dark slate background
@@ -131,4 +150,5 @@ func _process(_delta: float) -> void:
 		await get_tree().create_timer(0.4).timeout
 		get_tree().change_scene_to_packed(packed_scene)
 	elif status == ResourceLoader.THREAD_LOAD_FAILED:
-		is_loading
+		is_loading = false
+		status_label.text = "Failed to load scene!"
