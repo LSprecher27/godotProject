@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cxiujsf1hdbaf"]
+
+[ext_resource type="Script" uid="uid://cqdkfytikuct2" path="res://scripts/start_screen.gd" id="1_ncxyx"]
+
+[node name="StartScreen" type="Control" unique_id=372305986]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ncxyx")
+
+[node name="Label" type="Label" parent="." unique_id=1140132371]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 336.0
+offset_right = 224.0
+offset_bottom = 359.0
+text = "Loading...
+"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=498350222]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 147.0
+offset_right = 1421.0
+offset_bottom = 789.0
+
+[node name="PlayButton" type="Button" parent="." unique_id=655318135]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 187.0
+offset_right = 361.0
+offset_bottom = 218.0
+text = "Play
+"
