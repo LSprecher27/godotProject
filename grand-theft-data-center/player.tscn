@@ -53,6 +53,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785cb"]
+radius = 13.0
 
 [node name="Player" type="CharacterBody2D" unique_id=689730892 groups=["player"]]
 script = ExtResource("1_i3pqv")
@@ -64,5 +65,4 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1174080648]
-scale = Vector2(1.2986301, -1.2247363)
 shape = SubResource("CircleShape2D_785cb")

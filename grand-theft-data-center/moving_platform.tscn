@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/moving_platform.gd" id="1_move"]
+[ext_resource type="Texture2D" uid="uid://qgkqjytevuo0" path="res://assets/tilemap/city.png" id="2_city"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat"]
+size = Vector2(60, 20)
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+script = ExtResource("1_move")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_city")
+region_enabled = true
+region_rect = Rect2(0, 0, 60, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_plat")
+one_way_collision = true

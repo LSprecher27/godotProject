@@ -1,100 +1,104 @@
 extends CharacterBody2D
 class_name Player
 
-@export var speed: float = 130.0
-@export var jump_velocity: float = -300.0
-
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-
-
-var spawn_position: Vector2
-var is_dead: bool = false
-
-const SPEED = 130.0
-const JUMP_VELOCITY = -300.0
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@export var speed = 130.0
+@export var jump_velocity = -300.0
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var spawn_position = Vector2.ZERO
+var is_dead = false
+
+func _ready():
+	spawn_position = global_position
+
 func _physics_process(delta):
-	# Add the gravity.
+	# gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	# when dead, just fall off the screen and then respawn
+	if is_dead:
+		move_and_slide()
+		if global_position.y > spawn_position.y + 600:
+			respawn()
+		return
 
-	# Get the input direction: -1, 0, 1
+	# turn collision back on after respawning
+	# (we wait one frame so the physics engine knows we moved back to the start,
+	# otherwise the kill plane still thinks we are under it and kills us again)
+	if collision_layer == 0:
+		collision_layer = 1
+		collision_mask = 1
+
+	# jump
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
+
+	# left / right: -1, 0 or 1
 	var direction = Input.get_axis("move_left", "move_right")
-	
-	# Flip the Sprite
+
+	# flip the sprite
 	if direction > 0:
 		animated_sprite.flip_h = false
 	elif direction < 0:
 		animated_sprite.flip_h = true
-	
-	# Play animations
+
+	# animations
 	if is_on_floor():
 		if direction == 0:
 			animated_sprite.play("idle")
 		else:
 			animated_sprite.play("walk")
 
-	
-	# Apply movement
+	# move
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
-	
-func _ready() -> void:
-	# Store the starting position
-	spawn_position = global_position
+	check_spikes()
 
-func _physics_process_die(delta: float) -> void:
-	# 1. Death sequence physics
-	if is_dead:
-		# Continue falling through the world with gravity
-		velocity.y += gravity * delta
-		# When disabled, move_and_slide() will no longer collide with walls/floors
-		move_and_slide()
+# spike tiles have the "hazard" custom data turned on in the tileset
+func check_spikes():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var tilemap = collision.get_collider()
+		if tilemap is TileMapLayer:
+			# push the hit point a little into the tile so we get the right cell
+			var hit_point = collision.get_position() - collision.get_normal() * 2
+			var cell = tilemap.local_to_map(tilemap.to_local(hit_point))
+			var tile = tilemap.get_cell_tile_data(cell)
+			if tile and tile.get_custom_data("hazard"):
+				die()
+				return
 
-		# Check if the player has plunged far below the screen/map
-		if global_position.y > spawn_position.y + 600.0:
-			respawn()
-		return
-
-	# 2. Normal movement physics
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	# Regular player controls / movement here...
-	move_and_slide()
-
-func die() -> void:
+func die():
 	if is_dead:
 		return
-
 	is_dead = true
 	print("You died!")
 
-	# Disable collision safely on the physics frame so the player drops through all floors
-	collision_shape.set_deferred("disabled", true)
+	# turn off collision so we fall through the floor
+	# (layer 0 = nothing can hit us, mask 0 = we don't hit anything)
+	collision_layer = 0
+	collision_mask = 0
 
-	# Classic Mario hop: bounce slightly upward, then plummet downward
+	# little hop and flip upside down
 	velocity.x = 0
-	velocity.y = -250.0
+	velocity.y = -250
+	animated_sprite.flip_v = true
+	animated_sprite.play("idle")
 
-func respawn() -> void:
-	# Reset position and motion
+# called after stomping an enemy, gives a little jump
+func bounce():
+	velocity.y = jump_velocity * 0.8
+
+func respawn():
 	global_position = spawn_position
 	velocity = Vector2.ZERO
-
-	# Re-enable collision
-	collision_shape.set_deferred("disabled", false)
+	animated_sprite.flip_v = false
 	is_dead = false
+	# collision gets turned back on next frame in _physics_process

@@ -1,11 +1,11 @@
 extends Control
 
 # Customize these directly in the Inspector on the right!
-@export var game_title: String = "GRAND THEFT DATA CENTER"
-@export_file("*.tscn") var main_game_path: String = "res://game.tscn"
+@export var background_image: Texture2D = preload("res://assets/thumbnail.jpg")
+@export_file("*.tscn") var main_game_path: String = "res://levels/level_1.tscn"
 @export_file("*.mp3", "*.ogg", "*.wav") var menu_music_path: String = "res://assets/music/menuMusic.mp3"
 @export_range(-40.0, 6.0) var music_volume_db: float = 0.0
-@export var accent_color: Color = Color(0.24, 0.48, 0.96)
+@export var accent_color: Color = Color(0.93, 0.4, 0.08)
 
 var loading_overlay: ColorRect
 var progress_bar: ProgressBar
@@ -40,31 +40,24 @@ func _start_menu_music() -> void:
 	music_player.play()
 
 func _build_start_screen() -> void:
-	# Dark slate background
-	var bg := ColorRect.new()
-	bg.color = Color(0.08, 0.09, 0.13)
+	# Menu picture (it already has the game title drawn on it)
+	var bg := TextureRect.new()
+	bg.texture = background_image
+	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 
-	# Centered layout container
+	# Play button sits near the bottom middle of the screen
 	var center := CenterContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	center.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	center.offset_top = -150
+	center.offset_bottom = -40
 	add_child(center)
 
 	var vbox := VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 36)
 	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	center.add_child(vbox)
-
-	# Game Title
-	var title := Label.new()
-	title.text = game_title
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 52)
-	title.add_theme_color_override("font_color", Color.WHITE)
-	title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.6))
-	title.add_theme_constant_override("shadow_offset_y", 4)
-	vbox.add_child(title)
 
 	# Styled Play Button
 	var play_btn := Button.new()

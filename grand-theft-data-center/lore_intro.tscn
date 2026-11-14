@@ -1,0 +1,63 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/lore_intro.gd" id="1_lore"]
+
+[node name="LoreIntro" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_lore")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.035, 0.07, 0.92)
+
+[node name="Story" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 120.0
+offset_top = 40.0
+offset_right = -120.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.88, 0.9, 0.96, 1)
+theme_override_font_sizes/font_size = 20
+text = "GRAND THEFT DATA CENTER
+
+Somebody stole Dylan's car.
+
+Not just somebody. Tyler.
+
+And Tyler didn't take it for a joyride. He drove it straight into the data center and blew the whole place up.
+
+Now the data center is a smoking crater, Tyler is on the run, and Dylan's car is gone. Dylan wants it back.
+
+Run through the city, stomp the grannies blocking the sidewalk, and don't fall off the edge."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Hint" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -80.0
+offset_right = 200.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.82, 0.3, 1)
+theme_override_font_sizes/font_size = 20
+text = "Press any key to start"
+horizontal_alignment = 1
+vertical_alignment = 1
