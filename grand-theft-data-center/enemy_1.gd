@@ -52,6 +52,8 @@ func wall_in_front():
 func stomp():
 	is_stomped = true
 	velocity = Vector2.ZERO
+	GameManager.add_money(25)
+	GameManager.stomped_granny()
 
 	# squish the sprite flat
 	sprite.play("idle")

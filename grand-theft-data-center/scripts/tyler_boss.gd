@@ -3,20 +3,28 @@ extends CharacterBody2D
 # sent when Tyler runs out of health
 signal defeated
 
-@export var max_health = 3
-@export var speed = 60.0
-@export var charge_speed = 240.0
+@export var max_health = 5
+@export var speed = 70.0
+@export var charge_speed = 260.0
+# seconds between thrown traffic cones
+@export var throw_time = 2.0
+# seconds of walking before he charges
+@export var walk_time = 2.5
 
 @onready var sprite = $AnimatedSprite2D
 @onready var health_bar = $HealthBar/Bar
 
+var cone_scene = preload("res://thrown_cone.tscn")
+var granny_scene = preload("res://enemy_1.tscn")
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var health = 3
+var health = 5
 var direction = -1
+var throw_timer = 1.5
 
 # what Tyler is doing right now: "walk", "get_ready", "charge", "hurt" or "dead"
 var state = "walk"
-var state_timer = 3.0
+var state_timer = 2.5
 
 func _ready():
 	health = max_health
@@ -29,14 +37,20 @@ func _physics_process(delta):
 	state_timer -= delta
 
 	if state == "walk":
-		# stroll back and forth
+		# stroll back and forth, throwing cones at the player
 		velocity.x = direction * speed
 		sprite.play("walk")
 		if wall_in_front():
 			direction = -direction
+
+		throw_timer -= delta
+		if throw_timer <= 0:
+			throw_cone()
+			throw_timer = throw_time
+
 		if state_timer <= 0:
 			state = "get_ready"
-			state_timer = 0.8
+			state_timer = 0.6
 
 	elif state == "get_ready":
 		# stop, face the player and shake before charging
@@ -59,7 +73,7 @@ func _physics_process(delta):
 		if wall_in_front():
 			direction = -direction
 			state = "walk"
-			state_timer = 3.0
+			state_timer = walk_time
 
 	elif state == "hurt":
 		# stand still and flash for a moment after being stomped
@@ -69,7 +83,7 @@ func _physics_process(delta):
 		if state_timer <= 0:
 			sprite.visible = true
 			state = "walk"
-			state_timer = 2.0
+			state_timer = walk_time
 
 	elif state == "dead":
 		# fall off the screen, then go away
@@ -81,21 +95,48 @@ func _physics_process(delta):
 func wall_in_front():
 	return is_on_wall() and sign(get_wall_normal().x) == -direction
 
+# throw a traffic cone so it lands where the player is standing right now
+func throw_cone():
+	var player = get_tree().get_first_node_in_group("player")
+	if player.is_dead:
+		return
+	var cone = cone_scene.instantiate()
+	cone.global_position = global_position + Vector2(0, -70)
+
+	# physics: to land on the player in 1 second, move dx sideways and dy up/down
+	var flight_time = 1.0
+	var dx = player.global_position.x - cone.global_position.x
+	var dy = player.global_position.y - cone.global_position.y
+	cone.velocity.x = dx / flight_time
+	cone.velocity.y = (dy - 0.5 * gravity * flight_time * flight_time) / flight_time
+
+	get_parent().add_child(cone)
+
+# a granny falls from the sky to help Tyler
+func call_granny():
+	var granny = granny_scene.instantiate()
+	granny.global_position = Vector2(randf_range(300, 650), -200)
+	get_parent().call_deferred("add_child", granny)
+
 # called by the killzone when the player lands on Tyler's head
 func stomp():
 	if state == "hurt" or state == "dead":
 		return
 	health -= 1
 	health_bar.value = health
+	GameManager.add_money(100)
 
 	if health <= 0:
 		die()
 	else:
 		state = "hurt"
 		state_timer = 1.0
-		# every hit makes him angrier and faster
-		speed += 25
-		charge_speed += 60
+		call_granny()
+		# every hit makes him angrier: faster, throws more, charges sooner
+		speed += 20
+		charge_speed += 50
+		throw_time = max(0.8, throw_time - 0.3)
+		walk_time = max(1.2, walk_time - 0.3)
 
 func die():
 	state = "dead"
@@ -111,4 +152,7 @@ func die():
 	collision_mask = 0
 	$HealthBar.visible = false
 
+	# big reward for beating the boss
+	GameManager.add_money(500)
+	GameManager.beat_game()
 	defeated.emit()

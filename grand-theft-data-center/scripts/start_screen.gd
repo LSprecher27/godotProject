@@ -51,8 +51,8 @@ func _build_start_screen() -> void:
 	# Play button sits near the bottom middle of the screen
 	var center := CenterContainer.new()
 	center.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	center.offset_top = -150
-	center.offset_bottom = -40
+	center.offset_top = -190
+	center.offset_bottom = -30
 	add_child(center)
 
 	var vbox := VBoxContainer.new()
@@ -81,6 +81,40 @@ func _build_start_screen() -> void:
 
 	play_btn.pressed.connect(_on_play_pressed)
 	vbox.add_child(play_btn)
+
+	# Shop and Achievements buttons side by side under Play
+	vbox.add_theme_constant_override("separation", 12)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 12)
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	vbox.add_child(row)
+	row.add_child(_make_small_button("SHOP", "res://shop.tscn"))
+	row.add_child(_make_small_button("ACHIEVEMENTS", "res://achievements_screen.tscn"))
+
+	# how much money is saved up for the shop
+	GameManager.load_game()
+	var bank_label := Label.new()
+	bank_label.text = "BANK: $" + str(GameManager.bank)
+	bank_label.position = Vector2(20, 16)
+	bank_label.add_theme_font_size_override("font_size", 26)
+	bank_label.add_theme_color_override("font_color", Color(0.55, 0.95, 0.45))
+	bank_label.add_theme_color_override("font_outline_color", Color.BLACK)
+	bank_label.add_theme_constant_override("outline_size", 6)
+	add_child(bank_label)
+
+func _make_small_button(text: String, scene_path: String) -> Button:
+	var btn := Button.new()
+	btn.text = text
+	btn.custom_minimum_size = Vector2(170, 44)
+	btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	btn.add_theme_font_size_override("font_size", 18)
+	btn.add_theme_color_override("font_color", Color.WHITE)
+	btn.add_theme_stylebox_override("normal", _make_box(Color(0.12, 0.13, 0.2, 0.92), 10, 3))
+	btn.add_theme_stylebox_override("hover", _make_box(Color(0.22, 0.24, 0.34, 0.95), 10, 3))
+	btn.add_theme_stylebox_override("pressed", _make_box(Color(0.08, 0.09, 0.14, 0.95), 10, 1))
+	btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	btn.pressed.connect(func(): get_tree().change_scene_to_file(scene_path))
+	return btn
 
 func _build_loading_screen() -> void:
 	loading_overlay = ColorRect.new()
@@ -121,6 +155,8 @@ func _make_box(color: Color, radius: int, bottom_border: int) -> StyleBoxFlat:
 	return box
 
 func _on_play_pressed() -> void:
+	# new game, start with no money
+	GameManager.reset()
 	loading_overlay.show()
 	ResourceLoader.load_threaded_request(main_game_path)
 	is_loading = true

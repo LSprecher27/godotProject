@@ -27,7 +27,7 @@ func _show_message() -> void:
 	var layer := CanvasLayer.new()
 	add_child(layer)
 	var label := Label.new()
-	label.text = message
+	label.text = message + "\n\nCASH: $" + str(GameManager.money)
 	label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER

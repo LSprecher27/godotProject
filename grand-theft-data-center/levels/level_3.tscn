@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" path="res://tyler_boss.tscn" id="4_boss"]
 [ext_resource type="Script" path="res://scripts/level_goal.gd" id="6_goal"]
 [ext_resource type="PackedScene" path="res://lore_intro.tscn" id="7_lore"]
+[ext_resource type="PackedScene" path="res://cash.tscn" id="20_cash"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="21_hud"]
 
 [sub_resource type="Gradient" id="Gradient_sunset"]
 offsets = PackedFloat32Array(0, 0.55, 1)
@@ -99,6 +101,37 @@ There it is: Dylan's car. And sitting next to it... Tyler.
 
 But something is wrong. Tyler ate every snack in the data center vending machines, and he is now ENORMOUS.
 
-Climb the ledges, wait for him to walk underneath, and land on his head three times to get your car back!"
+He throws traffic cones, and every time you hurt him, a granny drops out of the sky to help.
+
+Climb the ledges, wait for him to walk underneath, and land on his head five times to get your car back!"
+
+[node name="Cash" type="Node2D" parent="."]
+
+[node name="Cash1" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(140, -100)
+
+[node name="Cash2" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(200, -140)
+
+[node name="Cash3" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(240, -140)
+
+[node name="Cash4" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(660, -100)
+
+[node name="Cash5" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(560, -140)
+
+[node name="Cash6" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(600, -140)
+
+[node name="GoldenBill" parent="." instance=ExtResource("20_cash")]
+modulate = Color(1.8, 1.45, 0.3, 1)
+position = Vector2(220, -216)
+scale = Vector2(1.3, 1.3)
+value = 100
+secret_number = 3
+
+[node name="HUD" parent="." instance=ExtResource("21_hud")]
 
 [connection signal="defeated" from="TylerBoss" to="Victory" method="win"]

@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://scripts/level_goal.gd" id="6_goal"]
 [ext_resource type="PackedScene" path="res://lore_intro.tscn" id="7_lore"]
 [ext_resource type="PackedScene" path="res://moving_platform.tscn" id="8_platform"]
+[ext_resource type="PackedScene" path="res://cash.tscn" id="20_cash"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="21_hud"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kill"]
 
@@ -175,3 +177,50 @@ A guy at the hot dog stand says he saw Dylan's car parked downtown this morning,
 The sidewalks are packed with grannies on their morning walk, and someone left the construction site wide open.
 
 Ride the moving platform, stomp the grannies (sorry, grandma), and keep going."
+
+[node name="Cash" type="Node2D" parent="."]
+
+[node name="Cash1" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(120, -30)
+
+[node name="Cash2" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(320, -40)
+
+[node name="Cash3" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(490, -80)
+
+[node name="Cash4" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(700, -50)
+
+[node name="Cash5" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(760, -50)
+
+[node name="Cash6" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(820, -50)
+
+[node name="Cash7" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(1050, -60)
+
+[node name="Cash8" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(1100, -100)
+
+[node name="Cash9" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(1140, -100)
+
+[node name="Cash10" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(1330, -30)
+
+[node name="Cash11" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(1410, -40)
+
+[node name="Cash12" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(1480, -30)
+
+[node name="GoldenBill" parent="." instance=ExtResource("20_cash")]
+modulate = Color(1.8, 1.45, 0.3, 1)
+position = Vector2(1120, -176)
+scale = Vector2(1.3, 1.3)
+value = 100
+secret_number = 2
+
+[node name="HUD" parent="." instance=ExtResource("21_hud")]

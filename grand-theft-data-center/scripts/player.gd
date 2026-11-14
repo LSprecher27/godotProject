@@ -9,9 +9,15 @@ class_name Player
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var spawn_position = Vector2.ZERO
 var is_dead = false
+# extra jumps you can do in the air (from the Double Jump shop item)
+var air_jumps = 0
 
 func _ready():
 	spawn_position = global_position
+	GameManager.load_game()
+	# Golden Dylan shop item
+	if GameManager.has_upgrade("gold_skin"):
+		animated_sprite.modulate = Color(1.6, 1.3, 0.4)
 
 func _physics_process(delta):
 	# gravity
@@ -21,7 +27,8 @@ func _physics_process(delta):
 	# when dead, just fall off the screen and then respawn
 	if is_dead:
 		move_and_slide()
-		if global_position.y > spawn_position.y + 600:
+		# only come back if we still have lives left (the HUD shows Game Over otherwise)
+		if global_position.y > spawn_position.y + 600 and GameManager.lives > 0:
 			respawn()
 		return
 
@@ -32,9 +39,15 @@ func _physics_process(delta):
 		collision_layer = 1
 		collision_mask = 1
 
-	# jump
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
+	# jump (and double jump if you bought it)
+	if is_on_floor():
+		air_jumps = GameManager.get_upgrade("double_jump")
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor():
+			velocity.y = jump_velocity
+		elif air_jumps > 0:
+			velocity.y = jump_velocity
+			air_jumps -= 1
 
 	# left / right: -1, 0 or 1
 	var direction = Input.get_axis("move_left", "move_right")
@@ -79,7 +92,8 @@ func die():
 	if is_dead:
 		return
 	is_dead = true
-	print("You died!")
+	GameManager.lose_life()
+	print("You died! Lives left: ", GameManager.lives)
 
 	# turn off collision so we fall through the floor
 	# (layer 0 = nothing can hit us, mask 0 = we don't hit anything)
@@ -95,6 +109,8 @@ func die():
 # called after stomping an enemy, gives a little jump
 func bounce():
 	velocity.y = jump_velocity * 0.8
+	# stomping gives you your double jump back
+	air_jumps = GameManager.get_upgrade("double_jump")
 
 func respawn():
 	global_position = spawn_position

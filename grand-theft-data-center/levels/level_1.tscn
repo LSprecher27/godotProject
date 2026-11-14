@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://knx3ttmatpmi" path="res://killzone.tscn" id="5_killzone"]
 [ext_resource type="Script" path="res://scripts/level_goal.gd" id="6_goal"]
 [ext_resource type="PackedScene" path="res://lore_intro.tscn" id="7_lore"]
+[ext_resource type="PackedScene" path="res://cash.tscn" id="20_cash"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="21_hud"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kill"]
 
@@ -110,3 +112,50 @@ position = Vector2(0, 200)
 [node name="Boundary" type="CollisionShape2D" parent="KillPlane"]
 shape = SubResource("WorldBoundaryShape2D_kill")
 [node name="LoreIntro" parent="." instance=ExtResource("7_lore")]
+
+[node name="Cash" type="Node2D" parent="."]
+
+[node name="Cash1" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(110, -30)
+
+[node name="Cash2" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(150, -30)
+
+[node name="Cash3" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(380, -50)
+
+[node name="Cash4" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(470, -60)
+
+[node name="Cash5" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(530, -100)
+
+[node name="Cash6" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(560, -100)
+
+[node name="Cash7" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(620, -25)
+
+[node name="Cash8" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(720, -30)
+
+[node name="Cash9" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(750, -30)
+
+[node name="Cash10" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(940, -60)
+
+[node name="Cash11" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(1090, -70)
+
+[node name="Cash12" parent="Cash" instance=ExtResource("20_cash")]
+position = Vector2(1180, -50)
+
+[node name="GoldenBill" parent="." instance=ExtResource("20_cash")]
+modulate = Color(1.8, 1.45, 0.3, 1)
+position = Vector2(550, -176)
+scale = Vector2(1.3, 1.3)
+value = 100
+secret_number = 1
+
+[node name="HUD" parent="." instance=ExtResource("21_hud")]
