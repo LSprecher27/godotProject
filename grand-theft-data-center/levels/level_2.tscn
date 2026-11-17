@@ -1,20 +1,15 @@
-[gd_scene format=3]
+[gd_scene format=4 uid="uid://mbvoqb3iry2"]
 
-[ext_resource type="TileSet" path="res://assets/tilemap/city_tileset.tres" id="1_tiles"]
+[ext_resource type="TileSet" uid="uid://cp8bvcxvqik6b" path="res://assets/tilemap/city_tileset.tres" id="1_tiles"]
 [ext_resource type="Texture2D" uid="uid://cdto36o37bp1p" path="res://assets/tilemap/city_bg.png" id="2_bg"]
 [ext_resource type="PackedScene" uid="uid://c5y33b5fmxwl2" path="res://player.tscn" id="3_player"]
 [ext_resource type="PackedScene" uid="uid://oasfxevaherf" path="res://enemy_1.tscn" id="4_enemy"]
 [ext_resource type="PackedScene" uid="uid://knx3ttmatpmi" path="res://killzone.tscn" id="5_killzone"]
-[ext_resource type="Script" path="res://scripts/level_goal.gd" id="6_goal"]
+[ext_resource type="Script" uid="uid://0pmeag4fb1m4" path="res://scripts/level_goal.gd" id="6_goal"]
 [ext_resource type="PackedScene" path="res://lore_intro.tscn" id="7_lore"]
 [ext_resource type="PackedScene" path="res://moving_platform.tscn" id="8_platform"]
 [ext_resource type="PackedScene" path="res://cash.tscn" id="20_cash"]
 [ext_resource type="PackedScene" path="res://hud.tscn" id="21_hud"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kill"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_goal"]
-size = Vector2(20, 20)
 
 [sub_resource type="Gradient" id="Gradient_sun"]
 offsets = PackedFloat32Array(0, 0.35, 0.45, 1)
@@ -28,13 +23,16 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
-[node name="Level2" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_goal"]
 
-[node name="Sky" type="CanvasLayer" parent="."]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kill"]
+
+[node name="Level2" type="Node2D" unique_id=1804860125]
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=541773858]
 layer = -10
 
-[node name="SkyColor" type="ColorRect" parent="Sky"]
-layout_mode = 3
+[node name="SkyColor" type="ColorRect" parent="Sky" unique_id=734859917]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -43,17 +41,17 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.53, 0.78, 0.96, 1)
 
-[node name="Sun" type="Sprite2D" parent="Sky"]
+[node name="Sun" type="Sprite2D" parent="Sky" unique_id=304440704]
 position = Vector2(960, 120)
 texture = SubResource("GradientTexture2D_sun")
 
-[node name="Clouds" type="Parallax2D" parent="."]
+[node name="Clouds" type="Parallax2D" parent="." unique_id=1445582046]
 scroll_scale = Vector2(0.1, 0.5)
 repeat_size = Vector2(480, 0)
-repeat_times = 3
 autoscroll = Vector2(-8, 0)
+repeat_times = 3
 
-[node name="Cloud1" type="Sprite2D" parent="Clouds"]
+[node name="Cloud1" type="Sprite2D" parent="Clouds" unique_id=1950578132]
 modulate = Color(2.4, 2.4, 2.5, 0.9)
 position = Vector2(60, -260)
 scale = Vector2(2, 2)
@@ -62,7 +60,7 @@ centered = false
 region_enabled = true
 region_rect = Rect2(80, 160, 40, 20)
 
-[node name="Cloud2" type="Sprite2D" parent="Clouds"]
+[node name="Cloud2" type="Sprite2D" parent="Clouds" unique_id=1290291987]
 modulate = Color(2.4, 2.4, 2.5, 0.9)
 position = Vector2(260, -220)
 scale = Vector2(2, 2)
@@ -71,12 +69,12 @@ centered = false
 region_enabled = true
 region_rect = Rect2(120, 160, 40, 20)
 
-[node name="FarSkyline" type="Parallax2D" parent="."]
+[node name="FarSkyline" type="Parallax2D" parent="." unique_id=20137272]
 scroll_scale = Vector2(0.2, 1)
 repeat_size = Vector2(320, 0)
-repeat_times = 3
+repeat_times = 5
 
-[node name="Sprite2D" type="Sprite2D" parent="FarSkyline"]
+[node name="Sprite2D" type="Sprite2D" parent="FarSkyline" unique_id=1643689459]
 modulate = Color(0.75, 0.85, 1, 0.35)
 position = Vector2(0, -160)
 scale = Vector2(2, 2)
@@ -85,12 +83,12 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 160, 80)
 
-[node name="NearSkyline" type="Parallax2D" parent="."]
+[node name="NearSkyline" type="Parallax2D" parent="." unique_id=2039694939]
 scroll_scale = Vector2(0.5, 1)
 repeat_size = Vector2(320, 0)
-repeat_times = 3
+repeat_times = 5
 
-[node name="Sprite2D" type="Sprite2D" parent="NearSkyline"]
+[node name="Sprite2D" type="Sprite2D" parent="NearSkyline" unique_id=187118459]
 modulate = Color(2.6, 2.8, 3.4, 0.75)
 position = Vector2(0, -160)
 scale = Vector2(2, 2)
@@ -99,61 +97,60 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 80, 160, 80)
 
-[node name="Decor" type="TileMapLayer" parent="."]
+[node name="Decor" type="TileMapLayer" parent="." unique_id=111259557]
 modulate = Color(1.3, 1.3, 1.3, 1)
-tile_map_data = PackedByteArray(0, 0, 4, 0, 254, 255, 0, 0, 0, 0, 6, 0, 0, 0, 5, 0, 254, 255, 0, 0, 1, 0, 6, 0, 0, 0, 4, 0, 255, 255, 0, 0, 0, 0, 7, 0, 0, 0, 5, 0, 255, 255, 0, 0, 1, 0, 7, 0, 0, 0, 9, 0, 255, 255, 0, 0, 7, 0, 5, 0, 0, 0, 10, 0, 255, 255, 0, 0, 7, 0, 5, 0, 0, 0, 27, 0, 253, 255, 0, 0, 6, 0, 0, 0, 0, 0, 28, 0, 253, 255, 0, 0, 7, 0, 0, 0, 0, 0, 27, 0, 254, 255, 0, 0, 6, 0, 1, 0, 0, 0, 27, 0, 255, 255, 0, 0, 6, 0, 2, 0, 0, 0, 29, 0, 255, 255, 0, 0, 4, 0, 5, 0, 0, 0, 46, 0, 255, 255, 0, 0, 2, 0, 7, 0, 0, 0, 47, 0, 255, 255, 0, 0, 3, 0, 7, 0, 0, 0, 59, 0, 254, 255, 0, 0, 0, 0, 6, 0, 0, 0, 60, 0, 254, 255, 0, 0, 1, 0, 6, 0, 0, 0, 59, 0, 255, 255, 0, 0, 0, 0, 7, 0, 0, 0, 60, 0, 255, 255, 0, 0, 1, 0, 7, 0, 0, 0, 66, 0, 255, 255, 0, 0, 5, 0, 5, 0, 0, 0, 73, 0, 255, 255, 0, 0, 6, 0, 5, 0, 0, 0, 74, 0, 253, 255, 0, 0, 6, 0, 0, 0, 0, 0, 75, 0, 253, 255, 0, 0, 7, 0, 0, 0, 0, 0, 74, 0, 254, 255, 0, 0, 6, 0, 1, 0, 0, 0, 74, 0, 255, 255, 0, 0, 6, 0, 2, 0, 0, 0, 76, 0, 255, 255, 0, 0, 6, 0, 3, 0, 0, 0, 77, 0, 253, 255, 0, 0, 4, 0, 6, 0, 0, 0, 77, 0, 254, 255, 0, 0, 4, 0, 7, 0, 0, 0, 77, 0, 255, 255, 0, 0, 4, 0, 8, 0, 0, 0)
+tile_map_data = PackedByteArray("AAAEAP7/AAAAAAYAAAAFAP7/AAABAAYAAAAEAP//AAAAAAcAAAAFAP//AAABAAcAAAAJAP//AAAHAAUAAAAKAP//AAAHAAUAAAAbAP3/AAAGAAAAAAAcAP3/AAAHAAAAAAAbAP7/AAAGAAEAAAAbAP//AAAGAAIAAAAdAP//AAAEAAUAAAAuAP//AAACAAcAAAAvAP//AAADAAcAAAA7AP7/AAAAAAYAAAA8AP7/AAABAAYAAAA7AP//AAAAAAcAAAA8AP//AAABAAcAAABCAP//AAAFAAUAAABJAP//AAAGAAUAAABKAP3/AAAGAAAAAABLAP3/AAAHAAAAAABKAP7/AAAGAAEAAABKAP//AAAGAAIAAABMAP//AAAGAAMAAABNAP3/AAAEAAYAAABNAP7/AAAEAAcAAABNAP//AAAEAAgAAAA=")
 tile_set = ExtResource("1_tiles")
 collision_enabled = false
 
-[node name="Ground" type="TileMapLayer" parent="."]
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1016557007]
 modulate = Color(1.9, 1.8, 1.6, 1)
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 3, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 3, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 3, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 4, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 4, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 4, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 5, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 5, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 5, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 5, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 6, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 6, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 6, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 7, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 7, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 7, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 7, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 7, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 8, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 8, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 8, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 8, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 8, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 9, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 9, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 9, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 9, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 9, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 10, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 10, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 10, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 10, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 11, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 11, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 11, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 11, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 11, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 12, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 12, 0, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 12, 0, 2, 0, 0, 0, 2, 0, 1, 0, 0, 0, 12, 0, 3, 0, 0, 0, 2, 0, 1, 0, 0, 0, 12, 0, 4, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 255, 255, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 254, 255, 0, 0, 3, 0, 4, 0, 0, 0, 0, 0, 253, 255, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 252, 255, 0, 0, 3, 0, 4, 0, 0, 0, 0, 0, 251, 255, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 250, 255, 0, 0, 3, 0, 4, 0, 0, 0, 0, 0, 249, 255, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 248, 255, 0, 0, 3, 0, 4, 0, 0, 0, 0, 0, 247, 255, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 246, 255, 0, 0, 3, 0, 4, 0, 0, 0, 0, 0, 245, 255, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 244, 255, 0, 0, 3, 0, 4, 0, 0, 0, 15, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 16, 0, 255, 255, 0, 0, 2, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 19, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 19, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 19, 0, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 20, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 20, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 20, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 20, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 21, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 21, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 21, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 21, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 21, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 22, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 22, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 22, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 22, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 22, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 23, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 23, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 23, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 23, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 23, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 24, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 24, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 24, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 24, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 24, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 25, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 25, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 25, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 25, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 25, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 26, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 26, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 26, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 26, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 26, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 27, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 27, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 27, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 27, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 27, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 28, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 28, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 28, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 28, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 28, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 29, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 29, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 29, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 29, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 29, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 30, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 30, 0, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 30, 0, 2, 0, 0, 0, 2, 0, 1, 0, 0, 0, 30, 0, 3, 0, 0, 0, 2, 0, 1, 0, 0, 0, 30, 0, 4, 0, 0, 0, 2, 0, 2, 0, 0, 0, 22, 0, 255, 255, 0, 0, 4, 0, 3, 0, 0, 0, 23, 0, 255, 255, 0, 0, 4, 0, 4, 0, 0, 0, 23, 0, 254, 255, 0, 0, 4, 0, 3, 0, 0, 0, 24, 0, 255, 255, 0, 0, 5, 0, 4, 0, 0, 0, 24, 0, 254, 255, 0, 0, 5, 0, 3, 0, 0, 0, 24, 0, 253, 255, 0, 0, 5, 0, 4, 0, 0, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 45, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 45, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 45, 0, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 46, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 46, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 46, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 46, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 46, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 47, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 47, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 47, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 47, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 47, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 48, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 48, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 48, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 48, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 48, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 49, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 49, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 49, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 49, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 49, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 50, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 50, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 50, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 50, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 50, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 51, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 51, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 51, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 51, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 51, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 52, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 52, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 52, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 52, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 52, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 53, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 53, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 53, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 53, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 53, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 54, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 54, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 54, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 54, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 54, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 55, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 55, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 55, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 55, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 55, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 56, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 56, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 56, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 56, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 56, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 57, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 57, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 57, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 57, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 57, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 58, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 58, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 58, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 58, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 58, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 59, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 59, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 59, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 59, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 59, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 60, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 60, 0, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 60, 0, 2, 0, 0, 0, 2, 0, 1, 0, 0, 0, 60, 0, 3, 0, 0, 0, 2, 0, 1, 0, 0, 0, 60, 0, 4, 0, 0, 0, 2, 0, 2, 0, 0, 0, 52, 0, 254, 255, 0, 0, 4, 0, 1, 0, 0, 0, 54, 0, 252, 255, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 253, 255, 0, 0, 0, 0, 2, 0, 0, 0, 55, 0, 252, 255, 0, 0, 1, 0, 0, 0, 0, 0, 55, 0, 253, 255, 0, 0, 1, 0, 2, 0, 0, 0, 56, 0, 252, 255, 0, 0, 1, 0, 0, 0, 0, 0, 56, 0, 253, 255, 0, 0, 1, 0, 2, 0, 0, 0, 57, 0, 252, 255, 0, 0, 2, 0, 0, 0, 0, 0, 57, 0, 253, 255, 0, 0, 2, 0, 2, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 64, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 64, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 64, 0, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 65, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 65, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 65, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 65, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 65, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 66, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 66, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 66, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 66, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 66, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 67, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 67, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 67, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 67, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 67, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 68, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 68, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 68, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 68, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 68, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 69, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 69, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 69, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 69, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 69, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 70, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 70, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 70, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 70, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 70, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 71, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 71, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 71, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 71, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 71, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 72, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 72, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 72, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 72, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 72, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 73, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 73, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 73, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 73, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 73, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 74, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 74, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 74, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 74, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 74, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 75, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 75, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 75, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 75, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 75, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 76, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 76, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 76, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 76, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 76, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 77, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 77, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 77, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 77, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 77, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 78, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 78, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 78, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 78, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 78, 0, 4, 0, 0, 0, 1, 0, 2, 0, 0, 0, 79, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 79, 0, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 79, 0, 2, 0, 0, 0, 2, 0, 1, 0, 0, 0, 79, 0, 3, 0, 0, 0, 2, 0, 1, 0, 0, 0, 79, 0, 4, 0, 0, 0, 2, 0, 2, 0, 0, 0, 70, 0, 255, 255, 0, 0, 3, 0, 3, 0, 0, 0, 79, 0, 255, 255, 0, 0, 3, 0, 3, 0, 0, 0, 79, 0, 254, 255, 0, 0, 3, 0, 4, 0, 0, 0, 79, 0, 253, 255, 0, 0, 3, 0, 3, 0, 0, 0, 79, 0, 252, 255, 0, 0, 3, 0, 4, 0, 0, 0, 79, 0, 251, 255, 0, 0, 3, 0, 3, 0, 0, 0, 79, 0, 250, 255, 0, 0, 3, 0, 4, 0, 0, 0, 79, 0, 249, 255, 0, 0, 3, 0, 3, 0, 0, 0, 79, 0, 248, 255, 0, 0, 3, 0, 4, 0, 0, 0, 79, 0, 247, 255, 0, 0, 3, 0, 3, 0, 0, 0, 79, 0, 246, 255, 0, 0, 3, 0, 4, 0, 0, 0, 79, 0, 245, 255, 0, 0, 3, 0, 3, 0, 0, 0, 79, 0, 244, 255, 0, 0, 3, 0, 4, 0, 0, 0)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAMAAAAAAAEAAAAAAAQAAAAAAAIAAAABAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAABAAMAAAABAAEAAAABAAQAAAABAAIAAAACAAAAAAABAAAAAAACAAEAAAABAAEAAAACAAIAAAABAAEAAAACAAMAAAABAAEAAAACAAQAAAABAAIAAAADAAAAAAABAAAAAAADAAEAAAABAAEAAAADAAIAAAABAAEAAAADAAMAAAABAAEAAAADAAQAAAABAAIAAAAEAAAAAAABAAAAAAAEAAEAAAABAAEAAAAEAAIAAAABAAEAAAAEAAMAAAABAAEAAAAEAAQAAAABAAIAAAAFAAAAAAABAAAAAAAFAAEAAAABAAEAAAAFAAIAAAABAAEAAAAFAAMAAAABAAEAAAAFAAQAAAABAAIAAAAGAAAAAAABAAAAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAAGAAMAAAABAAEAAAAGAAQAAAABAAIAAAAHAAAAAAABAAAAAAAHAAEAAAABAAEAAAAHAAIAAAABAAEAAAAHAAMAAAABAAEAAAAHAAQAAAABAAIAAAAIAAAAAAABAAAAAAAIAAEAAAABAAEAAAAIAAIAAAABAAEAAAAIAAMAAAABAAEAAAAIAAQAAAABAAIAAAAJAAAAAAABAAAAAAAJAAEAAAABAAEAAAAJAAIAAAABAAEAAAAJAAMAAAABAAEAAAAJAAQAAAABAAIAAAAKAAAAAAABAAAAAAAKAAEAAAABAAEAAAAKAAIAAAABAAEAAAAKAAMAAAABAAEAAAAKAAQAAAABAAIAAAALAAAAAAABAAAAAAALAAEAAAABAAEAAAALAAIAAAABAAEAAAALAAMAAAABAAEAAAALAAQAAAABAAIAAAAMAAAAAAACAAAAAAAMAAEAAAACAAEAAAAMAAIAAAACAAEAAAAMAAMAAAACAAEAAAAMAAQAAAACAAIAAAAAAP//AAADAAMAAAAAAP7/AAADAAQAAAAAAP3/AAADAAMAAAAAAPz/AAADAAQAAAAAAPv/AAADAAMAAAAAAPr/AAADAAQAAAAAAPn/AAADAAMAAAAAAPj/AAADAAQAAAAAAPf/AAADAAMAAAAAAPb/AAADAAQAAAAAAPX/AAADAAMAAAAAAPT/AAADAAQAAAAPAP//AAAAAAAAAAAPAAAAAAAAAAIAAAAQAP//AAACAAAAAAAQAAAAAAACAAIAAAATAAAAAAAAAAAAAAATAAEAAAAAAAEAAAATAAIAAAAAAAEAAAATAAMAAAAAAAEAAAATAAQAAAAAAAIAAAAUAAAAAAABAAAAAAAUAAEAAAABAAEAAAAUAAIAAAABAAEAAAAUAAMAAAABAAEAAAAUAAQAAAABAAIAAAAVAAAAAAABAAAAAAAVAAEAAAABAAEAAAAVAAIAAAABAAEAAAAVAAMAAAABAAEAAAAVAAQAAAABAAIAAAAWAAAAAAABAAAAAAAWAAEAAAABAAEAAAAWAAIAAAABAAEAAAAWAAMAAAABAAEAAAAWAAQAAAABAAIAAAAXAAAAAAABAAAAAAAXAAEAAAABAAEAAAAXAAIAAAABAAEAAAAXAAMAAAABAAEAAAAXAAQAAAABAAIAAAAYAAAAAAABAAAAAAAYAAEAAAABAAEAAAAYAAIAAAABAAEAAAAYAAMAAAABAAEAAAAYAAQAAAABAAIAAAAZAAAAAAABAAAAAAAZAAEAAAABAAEAAAAZAAIAAAABAAEAAAAZAAMAAAABAAEAAAAZAAQAAAABAAIAAAAaAAAAAAABAAAAAAAaAAEAAAABAAEAAAAaAAIAAAABAAEAAAAaAAMAAAABAAEAAAAaAAQAAAABAAIAAAAbAAAAAAABAAAAAAAbAAEAAAABAAEAAAAbAAIAAAABAAEAAAAbAAMAAAABAAEAAAAbAAQAAAABAAIAAAAcAAAAAAABAAAAAAAcAAEAAAABAAEAAAAcAAIAAAABAAEAAAAcAAMAAAABAAEAAAAcAAQAAAABAAIAAAAdAAAAAAABAAAAAAAdAAEAAAABAAEAAAAdAAIAAAABAAEAAAAdAAMAAAABAAEAAAAdAAQAAAABAAIAAAAeAAAAAAACAAAAAAAeAAEAAAACAAEAAAAeAAIAAAACAAEAAAAeAAMAAAACAAEAAAAeAAQAAAACAAIAAAAWAP//AAAEAAMAAAAXAP//AAAEAAQAAAAXAP7/AAAEAAMAAAAYAP//AAAFAAQAAAAYAP7/AAAFAAMAAAAYAP3/AAAFAAQAAAAtAAAAAAAAAAAAAAAtAAEAAAAAAAEAAAAtAAIAAAAAAAEAAAAtAAMAAAAAAAEAAAAtAAQAAAAAAAIAAAAuAAAAAAABAAAAAAAuAAEAAAABAAEAAAAuAAIAAAABAAEAAAAuAAMAAAABAAEAAAAuAAQAAAABAAIAAAAvAAAAAAABAAAAAAAvAAEAAAABAAEAAAAvAAIAAAABAAEAAAAvAAMAAAABAAEAAAAvAAQAAAABAAIAAAAwAAAAAAABAAAAAAAwAAEAAAABAAEAAAAwAAIAAAABAAEAAAAwAAMAAAABAAEAAAAwAAQAAAABAAIAAAAxAAAAAAABAAAAAAAxAAEAAAABAAEAAAAxAAIAAAABAAEAAAAxAAMAAAABAAEAAAAxAAQAAAABAAIAAAAyAAAAAAABAAAAAAAyAAEAAAABAAEAAAAyAAIAAAABAAEAAAAyAAMAAAABAAEAAAAyAAQAAAABAAIAAAAzAAAAAAABAAAAAAAzAAEAAAABAAEAAAAzAAIAAAABAAEAAAAzAAMAAAABAAEAAAAzAAQAAAABAAIAAAA0AAAAAAABAAAAAAA0AAEAAAABAAEAAAA0AAIAAAABAAEAAAA0AAMAAAABAAEAAAA0AAQAAAABAAIAAAA1AAAAAAABAAAAAAA1AAEAAAABAAEAAAA1AAIAAAABAAEAAAA1AAMAAAABAAEAAAA1AAQAAAABAAIAAAA2AAAAAAABAAAAAAA2AAEAAAABAAEAAAA2AAIAAAABAAEAAAA2AAMAAAABAAEAAAA2AAQAAAABAAIAAAA3AAAAAAABAAAAAAA3AAEAAAABAAEAAAA3AAIAAAABAAEAAAA3AAMAAAABAAEAAAA3AAQAAAABAAIAAAA4AAAAAAABAAAAAAA4AAEAAAABAAEAAAA4AAIAAAABAAEAAAA4AAMAAAABAAEAAAA4AAQAAAABAAIAAAA5AAAAAAABAAAAAAA5AAEAAAABAAEAAAA5AAIAAAABAAEAAAA5AAMAAAABAAEAAAA5AAQAAAABAAIAAAA6AAAAAAABAAAAAAA6AAEAAAABAAEAAAA6AAIAAAABAAEAAAA6AAMAAAABAAEAAAA6AAQAAAABAAIAAAA7AAAAAAABAAAAAAA7AAEAAAABAAEAAAA7AAIAAAABAAEAAAA7AAMAAAABAAEAAAA7AAQAAAABAAIAAAA8AAAAAAACAAAAAAA8AAEAAAACAAEAAAA8AAIAAAACAAEAAAA8AAMAAAACAAEAAAA8AAQAAAACAAIAAAA0AP7/AAAEAAEAAAA2APz/AAAAAAAAAAA2AP3/AAAAAAIAAAA3APz/AAABAAAAAAA3AP3/AAABAAIAAAA4APz/AAABAAAAAAA4AP3/AAABAAIAAAA5APz/AAACAAAAAAA5AP3/AAACAAIAAABAAAAAAAAAAAAAAABAAAEAAAAAAAEAAABAAAIAAAAAAAEAAABAAAMAAAAAAAEAAABAAAQAAAAAAAIAAABBAAAAAAABAAAAAABBAAEAAAABAAEAAABBAAIAAAABAAEAAABBAAMAAAABAAEAAABBAAQAAAABAAIAAABCAAAAAAABAAAAAABCAAEAAAABAAEAAABCAAIAAAABAAEAAABCAAMAAAABAAEAAABCAAQAAAABAAIAAABDAAAAAAABAAAAAABDAAEAAAABAAEAAABDAAIAAAABAAEAAABDAAMAAAABAAEAAABDAAQAAAABAAIAAABEAAAAAAABAAAAAABEAAEAAAABAAEAAABEAAIAAAABAAEAAABEAAMAAAABAAEAAABEAAQAAAABAAIAAABFAAAAAAABAAAAAABFAAEAAAABAAEAAABFAAIAAAABAAEAAABFAAMAAAABAAEAAABFAAQAAAABAAIAAABGAAAAAAABAAAAAABGAAEAAAABAAEAAABGAAIAAAABAAEAAABGAAMAAAABAAEAAABGAAQAAAABAAIAAABHAAAAAAABAAAAAABHAAEAAAABAAEAAABHAAIAAAABAAEAAABHAAMAAAABAAEAAABHAAQAAAABAAIAAABIAAAAAAABAAAAAABIAAEAAAABAAEAAABIAAIAAAABAAEAAABIAAMAAAABAAEAAABIAAQAAAABAAIAAABJAAAAAAABAAAAAABJAAEAAAABAAEAAABJAAIAAAABAAEAAABJAAMAAAABAAEAAABJAAQAAAABAAIAAABKAAAAAAABAAAAAABKAAEAAAABAAEAAABKAAIAAAABAAEAAABKAAMAAAABAAEAAABKAAQAAAABAAIAAABLAAAAAAABAAAAAABLAAEAAAABAAEAAABLAAIAAAABAAEAAABLAAMAAAABAAEAAABLAAQAAAABAAIAAABMAAAAAAABAAAAAABMAAEAAAABAAEAAABMAAIAAAABAAEAAABMAAMAAAABAAEAAABMAAQAAAABAAIAAABNAAAAAAABAAAAAABNAAEAAAABAAEAAABNAAIAAAABAAEAAABNAAMAAAABAAEAAABNAAQAAAABAAIAAABOAAAAAAABAAAAAABOAAEAAAABAAEAAABOAAIAAAABAAEAAABOAAMAAAABAAEAAABOAAQAAAABAAIAAABPAAAAAAACAAAAAABPAAEAAAACAAEAAABPAAIAAAACAAEAAABPAAMAAAACAAEAAABPAAQAAAACAAIAAABGAP//AAADAAMAAABPAP//AAADAAMAAABPAP7/AAADAAQAAABPAP3/AAADAAMAAABPAPz/AAADAAQAAABPAPv/AAADAAMAAABPAPr/AAADAAQAAABPAPn/AAADAAMAAABPAPj/AAADAAQAAABPAPf/AAADAAMAAABPAPb/AAADAAQAAABPAPX/AAADAAMAAABPAPT/AAADAAQAAAA=")
 tile_set = ExtResource("1_tiles")
 
-[node name="MovingPlatform" parent="." instance=ExtResource("8_platform")]
+[node name="MovingPlatform" parent="." unique_id=1201666416 instance=ExtResource("8_platform")]
 position = Vector2(670, -10)
-move_distance = 180.0
 
-[node name="Goal" type="Area2D" parent="."]
+[node name="Goal" type="Area2D" parent="." unique_id=1441802810]
 position = Vector2(1530, -10)
 script = ExtResource("6_goal")
 next_scene_path = "res://levels/level_3.tscn"
 message = "YOU FOUND TYLER'S TRAIL!"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=1125629347]
 shape = SubResource("RectangleShape2D_goal")
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Enemies" type="Node2D" parent="." unique_id=1548798768]
 
-[node name="Enemy1" parent="Enemies" instance=ExtResource("4_enemy")]
+[node name="Enemy1" parent="Enemies" unique_id=1358791614 instance=ExtResource("4_enemy")]
 position = Vector2(170, -20)
 patrol_distance = 60.0
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource("4_enemy")]
+[node name="Enemy2" parent="Enemies" unique_id=568372380 instance=ExtResource("4_enemy")]
 position = Vector2(540, -20)
 patrol_distance = 60.0
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource("4_enemy")]
+[node name="Enemy3" parent="Enemies" unique_id=339095870 instance=ExtResource("4_enemy")]
 position = Vector2(1120, -100)
 
-[node name="Enemy4" parent="Enemies" instance=ExtResource("4_enemy")]
+[node name="Enemy4" parent="Enemies" unique_id=151490117 instance=ExtResource("4_enemy")]
 position = Vector2(1130, -20)
 patrol_distance = 50.0
 
-[node name="Enemy5" parent="Enemies" instance=ExtResource("4_enemy")]
+[node name="Enemy5" parent="Enemies" unique_id=1751438254 instance=ExtResource("4_enemy")]
 position = Vector2(1360, -20)
 patrol_distance = 60.0
 
-[node name="Enemy6" parent="Enemies" instance=ExtResource("4_enemy")]
+[node name="Enemy6" parent="Enemies" unique_id=785473462 instance=ExtResource("4_enemy")]
 position = Vector2(1450, -20)
-patrol_distance = 40.0
 speed = 80.0
+patrol_distance = 40.0
 
-[node name="Player" parent="." instance=ExtResource("3_player")]
+[node name="Player" parent="." unique_id=958365331 instance=ExtResource("3_player")]
 position = Vector2(70, -20)
 scale = Vector2(1.2, 1.2)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1938268118]
 zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = -1000
@@ -161,13 +158,13 @@ limit_right = 1600
 limit_bottom = 100
 position_smoothing_enabled = true
 
-[node name="KillPlane" parent="." instance=ExtResource("5_killzone")]
+[node name="KillPlane" parent="." unique_id=1960301210 instance=ExtResource("5_killzone")]
 position = Vector2(0, 200)
 
-[node name="Boundary" type="CollisionShape2D" parent="KillPlane"]
+[node name="Boundary" type="CollisionShape2D" parent="KillPlane" unique_id=195363306]
 shape = SubResource("WorldBoundaryShape2D_kill")
 
-[node name="LoreIntro" parent="." instance=ExtResource("7_lore")]
+[node name="LoreIntro" parent="." unique_id=1369199900 instance=ExtResource("7_lore")]
 story_text = "LEVEL 2: DOWNTOWN, THE NEXT MORNING
 
 Dylan didn't sleep. He followed the smoke and the tire marks all night.
@@ -178,49 +175,49 @@ The sidewalks are packed with grannies on their morning walk, and someone left t
 
 Ride the moving platform, stomp the grannies (sorry, grandma), and keep going."
 
-[node name="Cash" type="Node2D" parent="."]
+[node name="Cash" type="Node2D" parent="." unique_id=2100693445]
 
-[node name="Cash1" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash1" parent="Cash" unique_id=613064547 instance=ExtResource("20_cash")]
 position = Vector2(120, -30)
 
-[node name="Cash2" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash2" parent="Cash" unique_id=760979572 instance=ExtResource("20_cash")]
 position = Vector2(320, -40)
 
-[node name="Cash3" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash3" parent="Cash" unique_id=1006557202 instance=ExtResource("20_cash")]
 position = Vector2(490, -80)
 
-[node name="Cash4" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash4" parent="Cash" unique_id=671617123 instance=ExtResource("20_cash")]
 position = Vector2(700, -50)
 
-[node name="Cash5" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash5" parent="Cash" unique_id=492706594 instance=ExtResource("20_cash")]
 position = Vector2(760, -50)
 
-[node name="Cash6" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash6" parent="Cash" unique_id=209414564 instance=ExtResource("20_cash")]
 position = Vector2(820, -50)
 
-[node name="Cash7" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash7" parent="Cash" unique_id=1160809330 instance=ExtResource("20_cash")]
 position = Vector2(1050, -60)
 
-[node name="Cash8" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash8" parent="Cash" unique_id=782776658 instance=ExtResource("20_cash")]
 position = Vector2(1100, -100)
 
-[node name="Cash9" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash9" parent="Cash" unique_id=542759001 instance=ExtResource("20_cash")]
 position = Vector2(1140, -100)
 
-[node name="Cash10" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash10" parent="Cash" unique_id=1746782614 instance=ExtResource("20_cash")]
 position = Vector2(1330, -30)
 
-[node name="Cash11" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash11" parent="Cash" unique_id=1930731156 instance=ExtResource("20_cash")]
 position = Vector2(1410, -40)
 
-[node name="Cash12" parent="Cash" instance=ExtResource("20_cash")]
+[node name="Cash12" parent="Cash" unique_id=766752308 instance=ExtResource("20_cash")]
 position = Vector2(1480, -30)
 
-[node name="GoldenBill" parent="." instance=ExtResource("20_cash")]
+[node name="GoldenBill" parent="." unique_id=2004338872 instance=ExtResource("20_cash")]
 modulate = Color(1.8, 1.45, 0.3, 1)
 position = Vector2(1120, -176)
 scale = Vector2(1.3, 1.3)
 value = 100
 secret_number = 2
 
-[node name="HUD" parent="." instance=ExtResource("21_hud")]
+[node name="HUD" parent="." unique_id=1528567899 instance=ExtResource("21_hud")]

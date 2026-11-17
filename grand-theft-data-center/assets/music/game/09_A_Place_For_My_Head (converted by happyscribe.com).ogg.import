@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dt1741j06uaj5"
+path="res://.godot/imported/09_A_Place_For_My_Head (converted by happyscribe.com).ogg-886cccaf17e33125ace1f7942ee0b089.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/game/09_A_Place_For_My_Head (converted by happyscribe.com).ogg"
+dest_files=["res://.godot/imported/09_A_Place_For_My_Head (converted by happyscribe.com).ogg-886cccaf17e33125ace1f7942ee0b089.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

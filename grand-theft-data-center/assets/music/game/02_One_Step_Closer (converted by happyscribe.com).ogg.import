@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c4kivvrk2y3ks"
+path="res://.godot/imported/02_One_Step_Closer (converted by happyscribe.com).ogg-2768d2b356100d98db1cc4883d510021.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/game/02_One_Step_Closer (converted by happyscribe.com).ogg"
+dest_files=["res://.godot/imported/02_One_Step_Closer (converted by happyscribe.com).ogg-2768d2b356100d98db1cc4883d510021.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

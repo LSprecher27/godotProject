@@ -9,7 +9,7 @@ class_name Player
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var spawn_position = Vector2.ZERO
 var is_dead = false
-# extra jumps you can do in the air (from the Double Jump shop item)
+# extra jumps you can do in the air 
 var air_jumps = 0
 
 func _ready():

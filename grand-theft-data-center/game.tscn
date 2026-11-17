@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://cs811xg1p1xhy"]
 
 [ext_resource type="PackedScene" uid="uid://c5y33b5fmxwl2" path="res://player.tscn" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://b0jsj6e6bamkn" path="res://game.gd" id="1_ryrav"]
 [ext_resource type="PackedScene" uid="uid://oasfxevaherf" path="res://enemy_1.tscn" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://knx3ttmatpmi" path="res://killzone.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://bk4y3pptj3ygk" path="res://collTest.tscn" id="4_fc0e3"]
-[ext_resource type="TileSet" path="res://assets/tilemap/city_tileset.tres" id="5_7jktm"]
+[ext_resource type="TileSet" uid="uid://cp8bvcxvqik6b" path="res://assets/tilemap/city_tileset.tres" id="5_7jktm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_785cb"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xlwbr"]
 
 [node name="Game" type="Node2D" unique_id=275028867]
+script = ExtResource("1_ryrav")
 
 [node name="Player" parent="." unique_id=1356228926 instance=ExtResource("1_e2o6t")]
 position = Vector2(186, -16)
@@ -41,3 +43,5 @@ scale = Vector2(7.36, 7.6400003)
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1477369745]
 position = Vector2(-2, 0)
 tile_set = ExtResource("5_7jktm")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1294052292]
